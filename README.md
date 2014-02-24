@@ -3,6 +3,8 @@ Graphunin = (collectd + Graphite) - Munin
 
 Graphunin is a simple javascript based dashboard application that mimics the per host dashboard layout that Munin is known for.  
 
+![Image](example/screenshot.png?raw=true)
+
 # Configuration
 
 Almost all configuration (Graphite server location, metric base, etc) is location in `graphunin.js`
