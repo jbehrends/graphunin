@@ -1,0 +1,22 @@
+body {
+  background-color:#E6EBF0;
+  color:black;
+}
+th.header, td.footer {
+  background-color:black;
+  font-variant:small-caps;
+  font-style:normal;
+  color:#669900;
+  font-size:48px;
+  border-radius: 20px;
+}
+.metricgroup {
+  margin-bottom: 0px;
+  font-size: 110%;
+  letter-spacing: 0.05em;
+  margin-left: 0px;
+  padding-left: 10px;
+  padding-bottom: 0px;
+  text-decoration: underline;
+  text-align:left;
+}

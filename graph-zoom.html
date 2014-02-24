@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Graphunin - Zoom View</title>
+    <meta Http-Equiv="Cache-Control" Content="no-cache">
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="graphunin.js"></script>
+    <link rel="stylesheet" type="text/css" href="graphunin-style.css">
+  </head>
+  <body>
+    <table class="table" border="0">
+      <tr>
+        <th class="header" colspan="3" >Graphunin - Zoom View</th>
+      </tr>
+      <tr>
+        <td rowspan="2" valign="top">
+          <BR>
+          <P><P>
+          <div id="links">
+            <B>Graphite servers:</B><BR>
+            <a href="http://prodGraphiteServer1.domain" target="_blank">Production Graphite</a><BR>
+            <a href="http://qaGraphiteServer1.domain" target="_blank">QA Graphite</a><BR>
+          </div>
+        </td>
+        <td align="center"><b></b></td>
+        <td align="center"><b></b></td>
+      </tr>
+      <tr>
+        <td valign="top"><div id="dGraphs1"></div></td>
+        <td valign="top"><div id="dGraphs2"></div></td>
+      </tr>
+      <tfoot>
+        <tr>
+          <td class="footer" colspan="3" height=20></td>
+        </tr>
+      </tfoot>
+    <script>
+      var zoomTarget = getQueryVariable("target"); // Grab the graph target from the passed url params.
+      var zoomTitle = getQueryVariable("title"); // Grab the graph title from the passed url params.
+      var zoomAreaMode = ""; 
+      if (getQueryVariable("areaMode") != false){var zoomAreaMode = getQueryVariable("areaMode");}; // See if the areaMode is passed and set it if true.
+   
+      //Build out our graphs.  You can adjust the date range for each graph below.
+      var gURL = "http://" + gServer + "/render/?width=" + gWidth + "&height=" + gHeight + "&target=" + zoomTarget + "&title=" + getQueryVariable("server") + "%20-%20" + zoomTitle + "&areaMode=" + zoomAreaMode;
+      $('#dGraphs1').append("Last Day<BR><img src=" + gURL + "&from=-1days> <BR>");
+      $('#dGraphs2').append("Last 2 Days<BR><img src=" + gURL + "&from=-2days> <BR>");
+      $('#dGraphs1').append("Last Week<BR><img src=" + gURL + "&from=-1week> <BR>");
+      $('#dGraphs2').append("Last Month<BR><img src=" + gURL + "&from=-1months> <BR>");
+      $('#dGraphs1').append("Last Year<BR><img src=" + gURL + "&from=-1years> <BR>");
+    </script>
+  </body>
+</html>

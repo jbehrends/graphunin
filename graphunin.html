@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Graphunin</title>
+    <meta Http-Equiv="Cache-Control" Content="no-cache">
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="graphunin.js"></script>
+    <link rel="stylesheet" type="text/css" href="graphunin-style.css">
+  </head>
+  <body>
+    <table class="table" border="0">
+      <tr>
+        <th class="header" colspan="3" >Graphunin</th>
+      </tr>
+      <tr>
+        <td rowspan="2" valign="top">
+          <B>Server:</B><BR>
+          <select id="serverSelect" onchange="updateURL()" ></select>
+          <BR><BR>
+          <B>Categories</B><BR>
+          <a href="#system">system</a><BR>
+          <a href="#networks">networks</a><BR>
+          <a href="#filesystem">file system</a><BR>
+          <a href="#disks">disks</a><BR>
+          <div id="jvms"></div>
+          <BR><P><P>
+          <div id="links">
+            <B>Graphite servers:</B><BR>
+            <a href="http://prodGraphiteServer1.domain" target="_blank">Production Graphite</a><BR>
+            <a href="http://qaGraphiteServer1.domain" target="_blank">QA Graphite</a><BR>
+          </div>
+        </td>
+        <td align="center"><b>Last day</b></td>
+        <td align="center"><b>Last week</b></td>
+      </tr>
+      <tr>
+        <td valign="top"><div id="dGraphs1"></div></td>
+        <td valign="top"><div id="dGraphs2"></div></td>
+      </tr>
+      <tfoot>
+        <tr>
+          <td class="footer" colspan="3" height=20></td>
+        </tr>
+      </tfoot>
+    </table>
+    <script>
+
+      var serverFromURL = getQueryVariable("server") //Query the URL for a server parameter
+
+      $(document).ready(function () {
+        if(serverFromURL != "") { //If a server is passed via the URL then lets update the graphs 
+          updateGraphs ();
+          $('#serverSelect').append("<option selected=\"selected\" value=" + serverFromURL + ">" + serverFromURL + "</option>");
+        }
+        else {$('#serverSelect').append("<option selected=\"selected\" disabled=\"disabled\" value=\"default\">Select a server</option>");} 
+        //Searching Graphite for all "server" nodes and then populating the selection box with the result set.
+        jQuery.getJSON("http://" + gServer + "/metrics/find/?format=treejson&query=" + gBase + "*", function(json){
+          for(x in json) {
+            $('#serverSelect').append("<option value=" + json[x].text + ">" + json[x].text + "</option>");
+          };
+        });
+      });
+    </script>
+  </body>
+</html>
+
