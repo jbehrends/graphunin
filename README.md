@@ -9,6 +9,10 @@ Graphunin is a simple javascript based dashboard application that mimics the per
 
 Almost all configuration (Graphite server location, metric base, etc) is location in `graphunin.js`
 
+# Installing / Running
+
+Clone this repo locally or onto a webserver.  Modify appropriate configuration files.  Point your browser at graphunin.html and start using.
+
 # Collectd configuration
 
 This is an example of the write_graphite configuration that Graphunin is currently configured to work with:
